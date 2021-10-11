@@ -1,5 +1,5 @@
-import math
 import json
+import statistics
 
 
 EMPLOYEE_JSON = """
@@ -50,19 +50,22 @@ def stats(employees_data, starting_age, starting_salary):
     # starting_age and starting_salary are used to compute the average yearly increase of salary.
 
     employees = Employee.from_json(employees_data)
-
-    average_age_increase = math.floor(sum([employee.age for employee in employees]) / len(employees)) - starting_age
-    average_salary_increase = math.floor(sum([employee.salary for employee in employees]) / len(employees)) - starting_salary
-    yearly_avg_increase = math.floor(average_salary_increase / average_age_increase)
-
     salaries = [employee.salary for employee in employees]
-    max_salary_employees = [employee for employee in employees if employee.salary == max(salaries)]
-    min_salary_employees = [employee for employee in employees if employee.salary == min(salaries)]
+    ages = [employee.age for employee in employees]
+
+    max_salary = max(salaries)
+    max_salary_employees = [employee for employee in employees if employee.salary == max_salary]
+
+    min_salary = min(salaries)
+    min_salary_employees = [employee for employee in employees if employee.salary == min_salary]
+
+    average_salary = statistics.mean(salaries)
+    average_age = statistics.mean(ages)
 
     return json.dumps({
-        'avg_age': math.floor(sum([employee.age for employee in employees]) / len(employees)),
-        'avg_salary': math.floor(sum([employee.salary for employee in employees]) / len(employees)),
-        'avg_yearly_increase': yearly_avg_increase,
+        'avg_age': average_age,
+        'avg_salary': average_salary,
+        'avg_yearly_increase': (average_salary - starting_salary) // (average_age - starting_age),
         'max_salary': [employee.to_dict() for employee in max_salary_employees],
         'min_salary': [employee.to_dict() for employee in min_salary_employees],
     })
