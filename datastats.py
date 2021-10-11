@@ -2,6 +2,16 @@ import math
 import json
 
 
+EMPLOYEE_JSON = """
+{
+    "age": 28,
+    "surname": "Mustermann",
+    "name": "Maria",
+    "salary": "€35000"
+}
+"""
+
+
 class DataStats:
 
     def stats(self, data, iage, isalary):
@@ -36,3 +46,11 @@ class DataStats:
             'max_salary': max_salary,
             'min_salary': min_salary
         })
+
+
+def main():
+    print(DataStats().stats(json.loads(f"[{EMPLOYEE_JSON}]"), iage=24, isalary=30000))
+
+
+if __name__ == "__main__":
+    main()
