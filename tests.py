@@ -50,7 +50,7 @@ class DataStatsTests(unittest.TestCase):
             ],
         }
         self.assertEqual(
-            json.loads(datastats.DataStats().stats(json.loads(EMPLOYEES_JSON), iage=24, isalary=30000)),
+            json.loads(datastats.stats(json.loads(EMPLOYEES_JSON), iage=24, isalary=30000)),
             expected)
 
 
