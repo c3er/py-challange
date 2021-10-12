@@ -37,7 +37,7 @@ class DataStatsTests(unittest.TestCase):
                     "age": 28,
                     "surname": "Mustermann",
                     "name": "Maria",
-                    "salary": "\u20ac35000",
+                    "salary": "€35000",
                 },
             ],
             "min_salary": [
@@ -45,7 +45,7 @@ class DataStatsTests(unittest.TestCase):
                     "age": 28,
                     "surname": "Mustermann",
                     "name": "Maria",
-                    "salary": "\u20ac35000",
+                    "salary": "€35000",
                 },
             ],
         }
