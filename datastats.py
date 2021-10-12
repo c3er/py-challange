@@ -1,6 +1,9 @@
 import json
+import math
 import statistics
 
+
+CURRENCY_DIGITS = 2
 
 EMPLOYEE_JSON = """
 {
@@ -63,9 +66,9 @@ def stats(employees_data, starting_age, starting_salary):
     average_age = statistics.mean(ages)
 
     return json.dumps({
-        'avg_age': average_age,
-        'avg_salary': average_salary,
-        'avg_yearly_increase': (average_salary - starting_salary) // (average_age - starting_age),
+        'avg_age': math.floor(average_age),
+        'avg_salary': round(average_salary, CURRENCY_DIGITS),
+        'avg_yearly_increase': round((average_salary - starting_salary) / (average_age - starting_age), CURRENCY_DIGITS),
         'max_salary': [employee.to_dict() for employee in max_salary_employees],
         'min_salary': [employee.to_dict() for employee in min_salary_employees],
     })
